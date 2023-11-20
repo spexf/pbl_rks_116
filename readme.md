@@ -2,7 +2,7 @@
 ## KRIPTOGRAFI KLASIK - CAESAR & VIGENERE CIPHER
 ### Deskripsi
 Repositori ini adalah repositori yang berisi projek PBL RKS Semester 1
-Projek ini berjudul Kriptografi Klasik, yang kami buat dalam bentuk web based menggunakan Flask, serta untuk UI nya dengan HTML CSS, Javascript, dan Jquery
+Projek ini berjudul Kriptografi Klasik, yang kami buat dalam bentuk web based menggunakan Flask, serta untuk UI nya dengan HTML CSS, TailwindCSS, Javascript, dan Jquery
 ### Anggota Kelompok
 Kelompok PBL kami terdiri dari 6 orang, 1 ketua dan 5 anggota
 * Muhammad Rasyad Musyaffa - Ketua
