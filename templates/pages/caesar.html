@@ -1,0 +1,143 @@
+{% extends "templates.html" %} {%block title%}Caesar Cipher{% endblock %}
+{%block body%}
+<div class="main-content">
+  <div class="encrypt">
+    <div class="title">CAESAR / ENCRYPT</div>
+    <div class="form">
+      <input
+        type="text"
+        name="plaintext"
+        id="plaintext"
+        class="input-text input-plaintext"
+        required
+        placeholder="Plaintext"
+      />
+
+      <div class="group">
+        <input
+          type="number"
+          name="key"
+          id="enc-key"
+          class="input-number input-key"
+          placeholder="1~25"
+          min="1"
+          max="25"
+          required
+        />
+        <div class="button-submit" id="encryptSubmit">ENC</div>
+      </div>
+
+      <textarea
+        name="result"
+        id="enc-result"
+        placeholder="Result"
+        readonly
+        class="result"
+      ></textarea>
+    </div>
+  </div>
+  <div class="decrypt">
+    <div class="title">CAESAR / DECRYPT</div>
+    <div class="form">
+      <input
+        type="text"
+        name="ciphertext"
+        id="ciphertext"
+        class="input-text input-ciphertext"
+        required
+        placeholder="Ciphertext"
+      />
+
+      <div class="group">
+        <input
+          type="number"
+          name="key"
+          id="dec-key"
+          class="input-number input-key"
+          required
+          placeholder="1~25"
+          min="1"
+          max="25"
+        />
+        <div class="button-submit" id="decryptSubmit">DEC</div>
+      </div>
+
+      <textarea
+        name="result"
+        id="dec-result"
+        placeholder="Result"
+        readonly
+        class="result"
+      ></textarea>
+    </div>
+  </div>
+</div>
+{% endblock %}
+<!-- JQUERY PACKAGES -->
+{% block scr %}
+<script>
+  $(document).ready(() => {
+    // VALIDATING
+
+    $("#enc-key").on("change", () => {
+      let keyVal = $("#enc-key").val();
+      if (keyVal < 1) {
+        alert("cant below 1");
+        $("#enc-key").focus();
+      } else if (keyVal > 25) {
+        alert("cant bigger than 25");
+        $("#enc-key").focus();
+      }
+    });
+    $("#dec-key").on("change", () => {
+      let keyVal = $("#dec-key").val();
+      if (keyVal < 1) {
+        alert("cant below 1");
+        $("#dec-key").focus();
+      } else if (keyVal > 25) {
+        alert("cant bigger than 25");
+        $("#dec-key").focus();
+      }
+    });
+
+    const encrypt = () => {
+      let plain = $("#plaintext").val();
+      let key = $("#enc-key").val();
+      if (key > 26 || key < 1) {
+        return alert("key harus diantara 1 - 26");
+      }
+      $.ajax({
+        url: `http://127.0.0.1:5000/api/caesar/enc?plain=${plain}&key=${key}`,
+        type: "POST",
+        success: (res) => {
+          $("#enc-result").text(res.data);
+          //console.log(res.data);
+          Toastify({
+            text: "Request Success",
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
+        },
+        error: (err) => {
+          console.log(err);
+          Toastify({
+            text: "Request Failed",
+            className: "danger",
+            style: {
+              background:
+                "linear-gradient(90deg, rgba(237,60,60,1) 0%, rgba(173,26,26,1) 100%)",
+            },
+          }).showToast();
+        },
+      });
+    };
+
+    $("#encryptSubmit").on("click", () => {
+      encrypt();
+    });
+  });
+</script>
+
+{% endblock %}

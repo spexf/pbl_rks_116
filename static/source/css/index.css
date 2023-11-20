@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    
+    body {
+        @apply bg-[#443C68];
+    }
+
+    .sidebar {
+        @apply md:w-[80px] md:h-[100vh] bg-[#6D51BB] flex md:flex-col items-center justify-center;
+    }
+
+    .sidebar-items {
+        @apply w-[59px] h-[59px] rounded-[50%] bg-[#1E1E1E]/[.82] flex items-center justify-around text-white md:my-[2rem] sm:mx-[2rem] font-medium text-[27px] hover:bg-[#D7C9FF] hover:text-slate-700 hover:cursor-pointer transition duration-300 drop-shadow-md;
+    }
+
+    .sidebar-items.active {
+        @apply bg-[#A585FF] text-slate-700;
+    }
+
+    .greet-1 {
+        letter-spacing: 6.75px;
+        @apply text-white font-medium text-[50px] mx-[2rem];
+    }
+
+
+    .main-content {
+        @apply flex items-center my-[4rem] justify-around mx-[4rem] w-full h-full;
+    }
+
+    .encrypt > .title,
+    .decrypt > .title {
+        letter-spacing: 2.5px;
+        text-align: left;
+        @apply text-white text-[27px] font-medium;
+    }
+
+    .main-content > .encrypt, 
+    .main-content > .decrypt {
+        @apply flex flex-col items-center w-[450px] h-[507px];
+    }
+    .main-content > .encrypt > .form, 
+    .main-content > .decrypt > .form {
+        @apply flex flex-col items-center w-[450px] h-[450px] justify-around;
+    }
+
+    .group {
+        @apply flex items-center justify-between w-[450px];
+    }
+
+    .input-text.input-plaintext,
+    .input-text.input-ciphertext {
+        @apply bg-[#6751A6] md:w-[450px] h-[50px] text-white font-medium px-[1.5rem] rounded-[25px] drop-shadow-md;
+    }
+
+    .input-text.input-key ,
+    .input-number.input-key {
+        @apply md:w-[268px] h-[50px] text-white font-medium bg-[#6751A6] rounded-[25px] px-[1.5rem] drop-shadow-md;
+    }
+
+    .button-submit {
+        @apply w-[160px] h-[50px] px-[1.5rem] text-white font-medium bg-[#936EFD] rounded-[25px] flex justify-around items-center drop-shadow-md hover:bg-[#7747FF] hover:cursor-pointer transition duration-300;
+    }
+
+    textarea.result {
+        resize: none;
+        @apply w-[450px] h-[248px] bg-[#6D51BB] px-[1.5rem] py-[1rem] rounded-[25px] drop-shadow-md text-white font-medium;
+    }
+
+
+}

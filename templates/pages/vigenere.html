@@ -1,0 +1,81 @@
+{% extends "templates.html" %} {%block title%} Vigenere Cipher {% endblock %}
+{%block body%}
+
+<div class="main-content">
+  <div class="encrypt">
+    <div class="title">VIGENERE / ENCRYPT</div>
+    <div class="form">
+      <input
+        type="text"
+        name="plaintext"
+        id="plaintext"
+        class="input-text input-plaintext"
+        required
+        placeholder="Plaintext"
+      />
+
+      <div class="group">
+        <input
+          type="text"
+          name="key"
+          id="enc-key"
+          class="input-text input-key"
+          placeholder="KEY"
+          min="1"
+          max="25"
+          required
+        />
+        <div class="button-submit" id="encryptSubmit">ENC</div>
+      </div>
+
+      <textarea
+        name="result"
+        id="enc-result"
+        placeholder="Result"
+        readonly
+        class="result"
+      ></textarea>
+    </div>
+  </div>
+  <div class="decrypt">
+    <div class="title">VIGENERE / DECRYPT</div>
+    <div class="form">
+      <input
+        type="text"
+        name="ciphertext"
+        id="ciphertext"
+        class="input-text input-ciphertext"
+        required
+        placeholder="Ciphertext"
+      />
+
+      <div class="group">
+        <input
+          type="text"
+          name="key"
+          id="dec-key"
+          class="input-text input-key"
+          required
+          placeholder="KEY"
+          min="1"
+          max="25"
+        />
+        <div class="button-submit" id="decryptSubmit">DEC</div>
+      </div>
+
+      <textarea
+        name="result"
+        id="dec-result"
+        placeholder="Result"
+        readonly
+        class="result"
+      ></textarea>
+    </div>
+  </div>
+</div>
+<!-- JQUERY PACKAGES -->
+{% block scr %}
+<script>
+  $(document).ready(() => {});
+</script>
+{% endblock %} {% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="stylesheet" href="../static/source/dist/index.css" />
+  </head>
+  <body class="flex sm:flex-col">
+    <div class="sidebar" id="sidebar">
+      <div id="home-nav" class="sidebar-items">A</div>
+      <div id="caesar-nav" class="sidebar-items">C</div>
+      <div id="vigenere-nav" class="sidebar-items">V</div>
+    </div>
+    {%block body%} {% endblock %}
+    <script src="../static/source/js/jquery-3.7.1.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      $(document).ready(() => {
+        let currentUrl = window.location.href;
+        let current_path = currentUrl.split("/")[3];
+        if (current_path == "") {
+          $("#home-nav").addClass("active");
+        } else if (current_path == "page?cipher=caesar") {
+          $("#caesar-nav").addClass("active");
+        } else if (current_path == "page?cipher=vigenere") {
+          $("#vigenere-nav").addClass("active");
+        }
+
+        //ROUTING BUTTON
+        $("#home-nav").on("click", () => {
+          window.location.href = "/";
+        });
+        $("#caesar-nav").on("click", () => {
+          window.location.href = "/page?cipher=caesar";
+        });
+        $("#vigenere-nav").on("click", () => {
+          window.location.href = "/page?cipher=vigenere";
+        });
+      });
+    </script>
+    {%block scr%} {% endblock %}
+  </body>
+</html>
