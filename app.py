@@ -21,7 +21,7 @@ def routingPage():
             
     
 @app.route('/api/caesar/enc', methods=['POST'])
-def caesarEnc ():
+def caesarEnc():
     requests = request.args.to_dict()
     caesar = cipher.Caesar()
     return jsonify(
