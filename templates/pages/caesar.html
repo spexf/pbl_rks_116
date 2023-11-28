@@ -78,6 +78,9 @@
 <script>
   $(document).ready(() => {
     // VALIDATING
+    let currentUrl = window.location.href;
+    // SLICE
+    let mainUrl = currentUrl.split("/");
 
     $("#enc-key").on("change", () => {
       let keyVal = $("#enc-key").val();
@@ -115,7 +118,7 @@
         $("#dec-key").focus();
       }
     });
-
+    console.log(mainUrl);
     const encrypt = () => {
       let plain = $("#plaintext").val();
       let key = $("#enc-key").val();
@@ -127,7 +130,7 @@
         });
       }
       $.ajax({
-        url: `http://127.0.0.1:5000/api/caesar/enc?plain=${plain}&key=${key}`,
+        url: `${mainUrl[0]}//${mainUrl[2]}/api/caesar/enc?plain=${plain}&key=${key}`,
         type: "POST",
         success: (res) => {
           $("#enc-result").text(res.data);
