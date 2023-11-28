@@ -78,36 +78,58 @@
 <script>
   $(document).ready(() => {
     // VALIDATING
+    let currentUrl = window.location.href;
+    // SLICE
+    let mainUrl = currentUrl.split("/");
 
     $("#enc-key").on("change", () => {
       let keyVal = $("#enc-key").val();
       if (keyVal < 1) {
-        alert("cant below 1");
+        Swal.fire({
+          title: "Key Error",
+          text: "Key Can't Less Than 1",
+          icon: "error",
+        });
         $("#enc-key").focus();
       } else if (keyVal > 25) {
-        alert("cant bigger than 25");
+        Swal.fire({
+          title: "Key Error",
+          text: "Key Can't Larger Than 25",
+          icon: "error",
+        });
         $("#enc-key").focus();
       }
     });
     $("#dec-key").on("change", () => {
       let keyVal = $("#dec-key").val();
       if (keyVal < 1) {
-        alert("cant below 1");
+        Swal.fire({
+          title: "Key Error",
+          text: "Key Can't Less Than 1",
+          icon: "error",
+        });
         $("#dec-key").focus();
       } else if (keyVal > 25) {
-        alert("cant bigger than 25");
+        Swal.fire({
+          title: "Key Error",
+          text: "Key Can't Larger Than 25",
+          icon: "error",
+        });
         $("#dec-key").focus();
       }
     });
-
     const encrypt = () => {
       let plain = $("#plaintext").val();
       let key = $("#enc-key").val();
       if (key > 26 || key < 1) {
-        return alert("key harus diantara 1 - 26");
+        return Swal.fire({
+          title: "Key Error",
+          text: "Key Can't Less Than 1 or Larger Than 26",
+          icon: "error",
+        });
       }
       $.ajax({
-        url: `http://127.0.0.1:5000/api/caesar/enc?plain=${plain}&key=${key}`,
+        url: `${mainUrl[0]}//${mainUrl[2]}/api/caesar/enc?plain=${plain}&key=${key}`,
         type: "POST",
         success: (res) => {
           $("#enc-result").text(res.data);
