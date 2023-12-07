@@ -19,12 +19,26 @@
   </head>
   <body class="flex sm:flex-col">
     <div class="sidebar" id="sidebar">
-      <div id="home-nav" class="sidebar-items">A</div>
-      <div id="caesar-nav" class="sidebar-items">C</div>
-      <div id="vigenere-nav" class="sidebar-items">V</div>
+      <div class="navigation">
+        <div id="home-nav" class="sidebar-items">A</div>
+        <div id="caesar-nav" class="sidebar-items">C</div>
+        <div id="vigenere-nav" class="sidebar-items">V</div>
+      </div>
+      <div class="profiles">
+        <div id="manages" class="sidebar-items profile">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div id="auth" class="sidebar-items auth">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </div>
+      </div>
     </div>
     {%block body%} {% endblock %}
     <script src="../static/source/js/jquery-3.7.1.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/fc32737a7d.js"
+      crossorigin="anonymous"
+    ></script>
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/toastify-js"
@@ -32,6 +46,33 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+      if (document.cookie.includes("access_token_cookie")) {
+        $("#manages").removeClass("hidden");
+        $("#auth").removeClass("hidden");
+        $("#auth").on("click", () => {
+          $.ajax({
+            url: "/api/auth/logout",
+            type: "POST",
+            success: (res) => {
+              return Swal.fire({
+                icon: "success",
+                title: "SIGN OUT SUCCESS",
+                text: "See You Next Time !",
+              }).then(() => {
+                window.location.href = "/";
+              });
+            },
+            error: (res) => {
+              return res;
+            },
+          });
+        });
+      } else {
+        $("#auth").on("click", () => {
+          window.location.href = "/auth/login";
+        });
+        $("#manages").addClass("hidden");
+      }
       $(document).ready(() => {
         let currentUrl = window.location.href;
         let current_path = currentUrl.split("/")[3];
@@ -41,17 +82,25 @@
           $("#caesar-nav").addClass("active");
         } else if (current_path == "page?cipher=vigenere") {
           $("#vigenere-nav").addClass("active");
+        } else if (current_path == "profile") {
+          $("#manages").addClass("active");
+        } else if (current_path == "auth/login") {
+          $("#auth").addClass("active");
         }
 
         //ROUTING BUTTON
+
         $("#home-nav").on("click", () => {
           window.location.href = "/";
         });
         $("#caesar-nav").on("click", () => {
-          window.location.href = "/page?cipher=caesar";
+          window.location.href = `/page?cipher=caesar`;
         });
         $("#vigenere-nav").on("click", () => {
-          window.location.href = "/page?cipher=vigenere";
+          window.location.href = `/page?cipher=vigenere`;
+        });
+        $("#manages").on("click", () => {
+          window.location.href = `/profile`;
         });
       });
     </script>

@@ -76,6 +76,10 @@
 <!-- JQUERY PACKAGES -->
 {% block scr %}
 <script>
+  const getCookie = (name) => {
+    var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    if (match) return match[2];
+  };
   $(document).ready(() => {
     // VALIDATING
     let currentUrl = window.location.href;
@@ -128,9 +132,16 @@
           icon: "error",
         });
       }
+
       $.ajax({
-        url: `${mainUrl[0]}//${mainUrl[2]}/api/caesar/enc?plain=${plain}&key=${key}`,
+        url: `/api/caesar/enc`,
         type: "POST",
+
+        data: JSON.stringify({
+          plain: plain,
+          key: key,
+        }),
+        contentType: "application/json",
         success: (res) => {
           $("#enc-result").text(res.data);
           //console.log(res.data);
