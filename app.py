@@ -142,6 +142,43 @@ def caesarEnc():
         status=200,
         data=result
     )
+
+@app.route('/api/vigenere/enc', methods=['POST'])
+@jwt_required()
+def vigenereEnc():
+    current_user = get_jwt_identity()
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # print(now)
+    requests = request.json
+    vigenere = cipher.Vigenere()
+    uid = Users.query.filter_by(username=current_user).first()
+    result = vigenere.encrypt(requests['plain'],requests['key'])
+    new_histories = Histories(type_of_cipher='Vigenere',methods='enc',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    sql.session.add(new_histories)
+    sql.session.commit()
+    
+    return jsonify(
+        status=200,
+        data=result
+    )
+@app.route('/api/vigenere/dec', methods=['POST'])
+@jwt_required()
+def vigenereDec():
+    current_user = get_jwt_identity()
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # print(now)
+    requests = request.json
+    vigenere = cipher.Vigenere()
+    uid = Users.query.filter_by(username=current_user).first()
+    result = vigenere.decrypt(requests['plain'],requests['key'])
+    new_histories = Histories(type_of_cipher='Vigenere',methods='dec',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    sql.session.add(new_histories)
+    sql.session.commit()
+    
+    return jsonify(
+        status=200,
+        data=result
+    )
     
 @app.route('/api/user/profile',methods=['POST'])
 def getUserData():
