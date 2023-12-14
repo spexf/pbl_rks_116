@@ -12,6 +12,17 @@ class Caesar:
                 cipher += upper[(int(upper.find(i)) + key) % 26]
         return cipher
 
+    def decrypt(self,cipher,key):
+        plain = ''
+        key = int(key)
+        for i in str(cipher.upper()):
+            if i not in str(upper):
+                plain += i
+            else:
+                plain += upper[(int(upper.find(i)) - key) % 26]
+        return plain
+
+
 class Vigenere:
     def generate_vigenere_table(self):
         table = []
