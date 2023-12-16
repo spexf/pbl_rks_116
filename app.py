@@ -125,15 +125,15 @@ def routingPage():
             
 @app.route('/api/caesar/dec', methods=['POST'])
 @jwt_required()
-def caesarEnc():
+def caesarDec():
     current_user = get_jwt_identity()
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     print(now)
     requests = request.json
     caesar = cipher.Caesar()
     uid = Users.query.filter_by(username=current_user).first()
-    result = caesar.decrypt(requests['plain'],requests['key'])
-    new_histories = Histories(type_of_cipher='Caesar',methods='dec',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    result = caesar.decrypt(requests['cipher'],requests['key'])
+    new_histories = Histories(type_of_cipher='Caesar',methods='dec',strings=requests['cipher'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
     # sql.session.execute(text(f'INSERT INTO histories(type_of_cipher, methods, strings, result,used_key, user_id) VALUES ("caesar","enc","{string}", "{result}", "{key}",{uid.id} )'))
