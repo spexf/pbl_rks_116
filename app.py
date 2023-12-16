@@ -5,7 +5,7 @@ from flask_jwt_extended import create_access_token,get_jwt_identity,jwt_required
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from werkzeug.security import generate_password_hash, check_password_hash
-from time import strftime
+
 
 app = Flask(__name__)
 
@@ -213,13 +213,13 @@ def historyApi():
     current_user = get_jwt_identity()
     data = Users.query.filter_by(username=current_user).first()
     history_data = Histories.query.filter_by(user_id=int(data.id))
-    retdata= dict()
-    indexing = 1
+    retdata= []
+    
     for i in history_data:
         jsonres = {"cipher":i.type_of_cipher, "plaintext":i.strings, "key":i.used_key, "result":i.result, "methods":i.methods, "time": i.created_at}
-        retdata[int(indexing)] = jsonres
-        indexing +=1
-    return jsonify(retdata),200
+        retdata.append(jsonres)
+
+    return jsonify(data=retdata,code=200),200
 
 
 @app.route('/profile',methods=['GET'])
@@ -230,7 +230,7 @@ def manageProfile():
     history_data = Histories.query.filter_by(user_id=int('5'))
     for i in history_data:
         print(i.type_of_cipher)
-    return f'halo {current_user}'
+    return render_template('pages/profile.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

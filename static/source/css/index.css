@@ -6,6 +6,27 @@
 
 @layer base {
 
+    /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #549ef1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #b9def3;
+    border-radius: 15px;
+    transition: all ease-in-out .3s;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3dffff;
+  }
     
     body {
         @apply bg-[#7FC1E3] w-[100%] h-[100%];
@@ -147,4 +168,59 @@
       text-align: center;
       @apply flex self-center text-[40px] font-medium drop-shadow-md; 
     }
+
+    .wrapper {
+      @apply  text-[15px] font-medium drop-shadow-md;
+    }
+
+    /* .history-container {
+      @apply flex flex-col items-center justify-between w-[80%] rounded-[15px] overflow-y-scroll h-[400px] self-center px-[15px] py-[15px] bg-[#D7C9FF];
+    } */
+
+    .data-display {
+      @apply w-[inherit] h-fit
+    }
+
+    thead {
+      @apply rounded-tl-lg rounded-tr-lg w-[100%];
+    }
+
+    th {
+      text-align: center;
+      @apply w-[260px] ; 
+    }
+
+    tbody.history-container {
+      overflow-y: scroll;
+      display: block;
+      @apply h-full w-full;
+      @apply px-[10px] py-[10px];
+    }
+
+    tr {
+      width: 250px;
+    }
+
+    table {
+      display: block;
+      @apply h-[300px] self-center w-[80%];
+    }
+
+    .user-data {
+      @apply flex items-center w-[50%] justify-around my-[20px];
+    }
+
+    .profile-image {
+      @apply rounded-[50%] w-[196px] h-[196px];
+    }
+
+    .profile-image > img {
+      @apply rounded-[50%] w-[196px] h-[196px]
+    }
+
+    .username,.email {
+      @apply font-medium text-[27px] text-[white];
+    }
+
+    
 }

@@ -1,0 +1,62 @@
+{% extends "templates.html" %} {%block title%}User Profile{% endblock %} {%block
+body%}
+<div class="flex flex-col items-center justify-around w-full h-full">
+  <div class="user-data">
+    <div class="profile-image">
+      <img src="https://i.imgflip.com/6ovcib.png?a472368" alt="profile" />
+    </div>
+    <div class="some-user-data">
+      <div class="username">udin</div>
+      <div class="email">hehe</div>
+    </div>
+  </div>
+  <div id="table">
+    <table class="table-auto self-center justify-self-center">
+      <thead>
+        <tr>
+          <th>Cipher</th>
+          <th>Inputed Text</th>
+          <th>Result</th>
+          <th>Methods</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody class="history-container" id="data-here"></tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+<!-- JQUERY PACKAGES -->
+{% block src %}
+<script>
+  $(document).ready(() => {
+    let margin = (screen.width - 80) / 2;
+    $("#table").addClass(`mx-[${margin}px]`);
+
+    $.ajax({
+      url: `/api/history`,
+      type: "GET",
+      contentType: "application/json",
+
+      success: (res) => {
+        console.log(res);
+        res.data.map((data) => {
+          $("#data-here").append(
+            `<tr class="wrapper">
+                <td class="data-display" id="cipher">${data.cipher}</td>
+                <td class="data-display" id="plain">${data.plaintext}</td>
+                <td class="data-display" id="result">${data.result}</td>
+                <td class="data-display" id="methods">${data.methods}</td>
+                <td class="data-display" id="datetime">${data.time}</td>
+            </tr>`
+          );
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  });
+</script>
+
+{% endblock %}

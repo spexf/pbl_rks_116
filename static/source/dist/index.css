@@ -436,6 +436,33 @@ video {
   display: none;
 }
 
+/* width */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #549ef1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #b9def3;
+  border-radius: 15px;
+  -webkit-transition: all ease-in-out .3s;
+  transition: all ease-in-out .3s;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3dffff;
+}
+
 body{
   height: 100%;
   width: 100%;
@@ -880,6 +907,84 @@ textarea.result{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.wrapper{
+  font-size: 15px;
+  font-weight: 500;
+  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+/* .history-container {
+      @apply flex flex-col items-center justify-between w-[80%] rounded-[15px] overflow-y-scroll h-[400px] self-center px-[15px] py-[15px] bg-[#D7C9FF];
+    } */
+
+.data-display{
+  height: -moz-fit-content;
+  height: fit-content;
+  width: inherit;
+}
+
+thead{
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+th {
+  text-align: center;
+  width: 260px;
+}
+
+tbody.history-container {
+  overflow-y: scroll;
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+tr {
+  width: 250px;
+}
+
+table {
+  display: block;
+  height: 300px;
+  width: 80%;
+  align-self: center;
+}
+
+.user-data{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.profile-image{
+  height: 196px;
+  width: 196px;
+  border-radius: 50%;
+}
+
+.profile-image > img{
+  height: 196px;
+  width: 196px;
+  border-radius: 50%;
+}
+
+.username,.email{
+  font-size: 27px;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -1132,6 +1237,11 @@ textarea.result{
   margin-bottom: 1rem;
 }
 
+.my-\[20px\]{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .my-\[2rem\]{
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -1258,8 +1368,20 @@ textarea.result{
   height: 100vh;
 }
 
+.h-\[196px\]{
+  height: 196px;
+}
+
 .h-\[248px\]{
   height: 248px;
+}
+
+.h-\[300px\]{
+  height: 300px;
+}
+
+.h-\[400px\]{
+  height: 400px;
 }
 
 .h-\[411px\]{
@@ -1298,6 +1420,11 @@ textarea.result{
   height: 80px;
 }
 
+.h-fit{
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-full{
   height: 100%;
 }
@@ -1318,12 +1445,24 @@ textarea.result{
   width: 161px;
 }
 
+.w-\[196px\]{
+  width: 196px;
+}
+
+.w-\[260px\]{
+  width: 260px;
+}
+
 .w-\[450px\]{
   width: 450px;
 }
 
 .w-\[477px\]{
   width: 477px;
+}
+
+.w-\[50\%\]{
+  width: 50%;
 }
 
 .w-\[59px\]{
@@ -1336,6 +1475,14 @@ textarea.result{
 
 .w-\[750px\]{
   width: 750px;
+}
+
+.w-\[80\%\]{
+  width: 80%;
+}
+
+.w-\[inherit\]{
+  width: inherit;
 }
 
 .w-fit{
@@ -2163,12 +2310,20 @@ textarea.result{
   border-radius: 0.25rem;
 }
 
+.rounded-\[15px\]{
+  border-radius: 15px;
+}
+
 .rounded-\[25px\]{
   border-radius: 25px;
 }
 
 .rounded-\[50\%\]{
   border-radius: 50%;
+}
+
+.rounded-lg{
+  border-radius: 0.5rem;
 }
 
 .rounded-md{
@@ -2205,12 +2360,25 @@ textarea.result{
   border-top-right-radius: 0.25rem;
 }
 
+.rounded-t-lg{
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
 .rounded-bl{
   border-bottom-left-radius: 0.25rem;
 }
 
+.rounded-bl-\[15px\]{
+  border-bottom-left-radius: 15px;
+}
+
 .rounded-br{
   border-bottom-right-radius: 0.25rem;
+}
+
+.rounded-br-\[15px\]{
+  border-bottom-right-radius: 15px;
 }
 
 .rounded-ee{
@@ -2233,8 +2401,16 @@ textarea.result{
   border-top-left-radius: 0.25rem;
 }
 
+.rounded-tl-lg{
+  border-top-left-radius: 0.5rem;
+}
+
 .rounded-tr{
   border-top-right-radius: 0.25rem;
+}
+
+.rounded-tr-lg{
+  border-top-right-radius: 0.5rem;
 }
 
 .border{
@@ -2299,6 +2475,11 @@ textarea.result{
   border-style: none;
 }
 
+.border-slate-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(100 116 139 / var(--tw-border-opacity));
+}
+
 .bg-\[\#02A1FF\]{
   --tw-bg-opacity: 1;
   background-color: rgb(2 161 255 / var(--tw-bg-opacity));
@@ -2321,6 +2502,11 @@ textarea.result{
 .bg-\[\#7FC1E3\]{
   --tw-bg-opacity: 1;
   background-color: rgb(127 193 227 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#D7C9FF\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(215 201 255 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#EDEDED\]{
@@ -2475,9 +2661,29 @@ textarea.result{
   padding-right: 1.5rem;
 }
 
+.px-\[10px\]{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.px-\[15px\]{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .px-\[32px\]{
   padding-left: 32px;
   padding-right: 32px;
+}
+
+.py-\[10px\]{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.py-\[15px\]{
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .py-\[1rem\]{
@@ -2544,6 +2750,10 @@ textarea.result{
 
 .align-super{
   vertical-align: super;
+}
+
+.text-\[15px\]{
+  font-size: 15px;
 }
 
 .text-\[18px\]{
@@ -2640,6 +2850,11 @@ textarea.result{
 .stacked-fractions{
   --tw-numeric-fraction: stacked-fractions;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.text-\[white\]{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-black{
