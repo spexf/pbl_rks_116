@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from module import cipher
 from flask_jwt_extended import create_access_token,get_jwt_identity,jwt_required,JWTManager, set_refresh_cookies, set_access_cookies, create_refresh_token, unset_jwt_cookies
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
+from sqlalchemy import text, delete
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -200,11 +200,18 @@ def vigenereDec():
     )
     
 @app.route('/api/user/profile',methods=['POST'])
+@jwt_required()
 def getUserData():
-    requests = request.args.to_dict()
+    current_user = get_jwt_identity()
+    data = Users.query.filter_by(username=current_user).first()
+    
+    data_to_return = {
+        'username': data.username,
+        'email': data.email
+    }
     return jsonify(
         status=200,
-        data='success'
+        data=data_to_return
     )
     
 @app.route('/api/history',methods=['GET'])
@@ -219,7 +226,7 @@ def historyApi():
         jsonres = {"cipher":i.type_of_cipher, "plaintext":i.strings, "key":i.used_key, "result":i.result, "methods":i.methods, "time": i.created_at}
         retdata.append(jsonres)
 
-    return jsonify(data=retdata,code=200),200
+    return jsonify(data=retdata,status=200),200
 
 
 @app.route('/profile',methods=['GET'])
@@ -231,6 +238,21 @@ def manageProfile():
     for i in history_data:
         print(i.type_of_cipher)
     return render_template('pages/profile.html')
+
+@app.route('/api/history/clear', methods=['POST'])
+@jwt_required()
+def clearHistory():
+    current_user = get_jwt_identity()
+    data = Users.query.filter_by(username=current_user).first()
+    # rm = delete(Histories).where(Histories.user_id==int(data.id))
+    deleteHistory = Histories.query.filter_by(user_id=data.id)
+    if deleteHistory:
+        for i in deleteHistory:
+            sql.session.delete(i)
+            sql.session.commit()
+    
+    return jsonify(message='success'
+                   , status=200)
 
 if __name__ == "__main__":
     app.run(debug=True)

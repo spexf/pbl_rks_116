@@ -101,7 +101,7 @@
     }
 
     .--login-container{
-      @apply w-[100vw] h-[100vh] flex items-center justify-between;
+      @apply w-[100vw] h-[100vh] flex items-center justify-center;
     }
 
     .--images {
@@ -169,6 +169,10 @@
       @apply flex self-center text-[40px] font-medium drop-shadow-md; 
     }
 
+    .clear-button {
+      @apply flex items-center transition-all duration-300 text-white cursor-pointer justify-around w-[120px] h-[50px] font-medium text-[15px] bg-rose-600 hover:bg-rose-700 active:bg-rose-900 rounded-lg;
+    }
+
     .wrapper {
       @apply  text-[15px] font-medium drop-shadow-md;
     }
@@ -193,7 +197,7 @@
     tbody.history-container {
       overflow-y: scroll;
       display: block;
-      @apply h-full w-full;
+      @apply h-[250px] w-full;
       @apply px-[10px] py-[10px];
     }
 
@@ -203,11 +207,15 @@
 
     table {
       display: block;
-      @apply h-[300px] self-center w-[80%];
+      @apply h-[300px] self-center w-[80%] bg-[#F6F4EB] rounded-[15px];
+    }
+
+    .table-container {
+      @apply w-full flex justify-around my-[50px]  ;
     }
 
     .user-data {
-      @apply flex items-center w-[50%] justify-around my-[20px];
+      @apply flex items-center w-[40%]  my-[20px];
     }
 
     .profile-image {
@@ -219,7 +227,11 @@
     }
 
     .username,.email {
-      @apply font-medium text-[27px] text-[white];
+      @apply font-medium w-[80%] text-[27px] text-[white];
+    }
+
+    .some-user-data {
+      @apply mx-[40px]
     }
 
     

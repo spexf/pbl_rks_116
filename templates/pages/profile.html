@@ -6,11 +6,12 @@ body%}
       <img src="https://i.imgflip.com/6ovcib.png?a472368" alt="profile" />
     </div>
     <div class="some-user-data">
-      <div class="username">udin</div>
-      <div class="email">hehe</div>
+      <div id="username" class="username">udin</div>
+      <div id="email" class="email">hehe</div>
     </div>
   </div>
-  <div id="table">
+  <div class="table-container" id="table">
+    <div id="clear" class="clear-button">Clear Histories</div>
     <table class="table-auto self-center justify-self-center">
       <thead>
         <tr>
@@ -34,6 +35,17 @@ body%}
     $("#table").addClass(`mx-[${margin}px]`);
 
     $.ajax({
+      url: "/api/user/profile",
+      type: "POST",
+      contentType: "application/json",
+      success: (res) => {
+        console.log(res.data.email);
+        $("#username").text(res.data.username);
+        $("#email").text(res.data.email);
+      },
+    });
+
+    $.ajax({
       url: `/api/history`,
       type: "GET",
       contentType: "application/json",
@@ -55,6 +67,42 @@ body%}
       error: (err) => {
         console.log(err);
       },
+    });
+
+    const clearData = () => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: "/api/history/clear",
+            type: "POST",
+            contentType: "application/json",
+            success: (res) => {
+              console.log(res);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your history data has been deleted.",
+                icon: "success",
+              }).then(() => {
+                return location.reload();
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+        }
+      });
+    };
+    $("#clear").on("click", () => {
+      clearData();
     });
   });
 </script>

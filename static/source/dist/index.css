@@ -729,7 +729,7 @@ textarea.result{
   height: 100vh;
   width: 100vw;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .--images{
@@ -907,6 +907,35 @@ textarea.result{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.clear-button{
+  display: flex;
+  height: 50px;
+  width: 120px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(225 29 72 / var(--tw-bg-opacity));
+  font-size: 15px;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.clear-button:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 18 60 / var(--tw-bg-opacity));
+}
+
+.clear-button:active{
+  --tw-bg-opacity: 1;
+  background-color: rgb(136 19 55 / var(--tw-bg-opacity));
+}
+
 .wrapper{
   font-size: 15px;
   font-weight: 500;
@@ -938,7 +967,7 @@ th {
 tbody.history-container {
   overflow-y: scroll;
   display: block;
-  height: 100%;
+  height: 250px;
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
@@ -955,15 +984,25 @@ table {
   height: 300px;
   width: 80%;
   align-self: center;
+  border-radius: 15px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 244 235 / var(--tw-bg-opacity));
+}
+
+.table-container{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .user-data{
   margin-top: 20px;
   margin-bottom: 20px;
   display: flex;
-  width: 50%;
+  width: 40%;
   align-items: center;
-  justify-content: space-around;
 }
 
 .profile-image{
@@ -979,10 +1018,16 @@ table {
 }
 
 .username,.email{
+  width: 80%;
   font-size: 27px;
   font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.some-user-data{
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 *, ::before, ::after{
@@ -1222,6 +1267,11 @@ table {
   margin-right: 2rem;
 }
 
+.mx-\[40px\]{
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
 .mx-\[4rem\]{
   margin-left: 4rem;
   margin-right: 4rem;
@@ -1255,6 +1305,11 @@ table {
 .my-\[4rem\]{
   margin-top: 4rem;
   margin-bottom: 4rem;
+}
+
+.my-\[50px\]{
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .mt-2{
@@ -1376,6 +1431,10 @@ table {
   height: 248px;
 }
 
+.h-\[250px\]{
+  height: 250px;
+}
+
 .h-\[300px\]{
   height: 300px;
 }
@@ -1437,6 +1496,10 @@ table {
   width: 100vw;
 }
 
+.w-\[120px\]{
+  width: 120px;
+}
+
 .w-\[160px\]{
   width: 160px;
 }
@@ -1453,16 +1516,16 @@ table {
   width: 260px;
 }
 
+.w-\[40\%\]{
+  width: 40%;
+}
+
 .w-\[450px\]{
   width: 450px;
 }
 
 .w-\[477px\]{
   width: 477px;
-}
-
-.w-\[50\%\]{
-  width: 50%;
 }
 
 .w-\[59px\]{
@@ -2369,16 +2432,8 @@ table {
   border-bottom-left-radius: 0.25rem;
 }
 
-.rounded-bl-\[15px\]{
-  border-bottom-left-radius: 15px;
-}
-
 .rounded-br{
   border-bottom-right-radius: 0.25rem;
-}
-
-.rounded-br-\[15px\]{
-  border-bottom-right-radius: 15px;
 }
 
 .rounded-ee{
@@ -2523,6 +2578,21 @@ table {
   background-color: rgb(255 255 255 / 15%);
 }
 
+.bg-rose-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(225 29 72 / var(--tw-bg-opacity));
+}
+
+.bg-rose-700{
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 18 60 / var(--tw-bg-opacity));
+}
+
+.bg-slate-700{
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+}
+
 .bg-transparent{
   background-color: transparent;
 }
@@ -2656,6 +2726,11 @@ table {
      object-fit: scale-down;
 }
 
+.px-8{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .px-\[1\.5rem\]{
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -2674,6 +2749,11 @@ table {
 .px-\[32px\]{
   padding-left: 32px;
   padding-right: 32px;
+}
+
+.py-8{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .py-\[10px\]{
@@ -3223,6 +3303,11 @@ table {
   background-color: rgb(215 201 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-rose-700:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 18 60 / var(--tw-bg-opacity));
+}
+
 .hover\:text-\[\#2fffff\]:hover{
   --tw-text-opacity: 1;
   color: rgb(47 255 255 / var(--tw-text-opacity));
@@ -3241,6 +3326,11 @@ table {
 .active\:bg-\[\#69ADD6\]:active{
   --tw-bg-opacity: 1;
   background-color: rgb(105 173 214 / var(--tw-bg-opacity));
+}
+
+.active\:bg-rose-900:active{
+  --tw-bg-opacity: 1;
+  background-color: rgb(136 19 55 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 360px) and (max-width: 719px){
