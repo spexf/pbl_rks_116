@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from module import cipher
 from flask_jwt_extended import create_access_token,get_jwt_identity,jwt_required,JWTManager, set_refresh_cookies, set_access_cookies, create_refresh_token, unset_jwt_cookies
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text, delete
+from sqlalchemy import text
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -14,7 +14,7 @@ app.config['JWT_TOKEN_LOCATION'] = ['cookies','headers']
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/pblRKS116'
 app.config['JWT_ACCESS_COOKIE_PATH'] = '/api/'
 app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
-
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config['JWT_COOKIE_CSRF_PROTECT'] = False
 
 
@@ -148,7 +148,6 @@ def caesarDec():
     new_histories = Histories(type_of_cipher='Caesar',operation='dec',strings=requests['cipher'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
-    # sql.session.execute(text(f'INSERT INTO histories(type_of_cipher, methods, strings, result,used_key, user_id) VALUES ("caesar","enc","{string}", "{result}", "{key}",{uid.id} )'))
     
     return jsonify(
         status=200,
@@ -167,7 +166,6 @@ def caesarEnc():
     new_histories = Histories(type_of_cipher='Caesar',operation='enc',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
-    # sql.session.execute(text(f'INSERT INTO histories(type_of_cipher, methods, strings, result,used_key, user_id) VALUES ("caesar","enc","{string}", "{result}", "{key}",{uid.id} )'))
     
     return jsonify(
         status=200,
@@ -179,7 +177,6 @@ def caesarEnc():
 def vigenereEnc():
     current_user = get_jwt_identity()
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    # print(now)
     requests = request.json
     vigenere = cipher.Vigenere()
     uid = Users.query.filter_by(username=current_user).first()
@@ -197,7 +194,6 @@ def vigenereEnc():
 def vigenereDec():
     current_user = get_jwt_identity()
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    # print(now)
     requests = request.json
     vigenere = cipher.Vigenere()
     uid = Users.query.filter_by(username=current_user).first()
@@ -244,11 +240,6 @@ def historyApi():
 @app.route('/profile',methods=['GET'])
 @jwt_required()
 def manageProfile():
-    current_user = get_jwt_identity()
-    data = Users.query.filter_by(username=current_user).first()
-    history_data = Histories.query.filter_by(user_id=int('5'))
-    for i in history_data:
-        print(i.type_of_cipher)
     return render_template('pages/profile.html')
 
 @app.route('/api/history/clear', methods=['POST'])
@@ -256,7 +247,6 @@ def manageProfile():
 def clearHistory():
     current_user = get_jwt_identity()
     data = Users.query.filter_by(username=current_user).first()
-    # rm = delete(Histories).where(Histories.user_id==int(data.id))
     deleteHistory = Histories.query.filter_by(user_id=data.id)
     if deleteHistory:
         for i in deleteHistory:
