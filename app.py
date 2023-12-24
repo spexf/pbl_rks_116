@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.config['JWT_SECRET_KEY'] = 'fd9f74595c05499287de366bcc1068d6'
 app.config['JWT_TOKEN_LOCATION'] = ['cookies','headers']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://flask:flaskpbl116@localhost/pblRKS116'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/pblRKS116'
 app.config['JWT_ACCESS_COOKIE_PATH'] = '/api/'
 app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
 
@@ -33,7 +33,7 @@ class Users(sql.Model):
 class Histories(sql.Model):
     id = sql.Column(sql.Integer, primary_key=True)
     type_of_cipher = sql.Column(sql.String(255), nullable=False)
-    methods = sql.Column(sql.Enum('enc','dec'), nullable=False)
+    operation = sql.Column(sql.Enum('enc','dec'), nullable=False)
     strings = sql.Column(sql.String(255), nullable=False)
     result = sql.Column(sql.String(255), nullable=False)
     used_key = sql.Column(sql.String(255), nullable=False)
@@ -133,7 +133,7 @@ def caesarDec():
     caesar = cipher.Caesar()
     uid = Users.query.filter_by(username=current_user).first()
     result = caesar.decrypt(requests['cipher'],requests['key'])
-    new_histories = Histories(type_of_cipher='Caesar',methods='dec',strings=requests['cipher'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    new_histories = Histories(type_of_cipher='Caesar',operation='dec',strings=requests['cipher'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
     # sql.session.execute(text(f'INSERT INTO histories(type_of_cipher, methods, strings, result,used_key, user_id) VALUES ("caesar","enc","{string}", "{result}", "{key}",{uid.id} )'))
@@ -152,7 +152,7 @@ def caesarEnc():
     caesar = cipher.Caesar()
     uid = Users.query.filter_by(username=current_user).first()
     result = caesar.encrypt(requests['plain'],requests['key'])
-    new_histories = Histories(type_of_cipher='Caesar',methods='enc',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    new_histories = Histories(type_of_cipher='Caesar',operation='enc',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
     # sql.session.execute(text(f'INSERT INTO histories(type_of_cipher, methods, strings, result,used_key, user_id) VALUES ("caesar","enc","{string}", "{result}", "{key}",{uid.id} )'))
@@ -172,7 +172,7 @@ def vigenereEnc():
     vigenere = cipher.Vigenere()
     uid = Users.query.filter_by(username=current_user).first()
     result = vigenere.encrypt(requests['plain'],requests['key'])
-    new_histories = Histories(type_of_cipher='Vigenere',methods='enc',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    new_histories = Histories(type_of_cipher='Vigenere',operation='enc',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
     
@@ -190,7 +190,7 @@ def vigenereDec():
     vigenere = cipher.Vigenere()
     uid = Users.query.filter_by(username=current_user).first()
     result = vigenere.decrypt(requests['plain'],requests['key'])
-    new_histories = Histories(type_of_cipher='Vigenere',methods='dec',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
+    new_histories = Histories(type_of_cipher='Vigenere',operation='dec',strings=requests['plain'], result=result,used_key=requests['key'] ,user_id=uid.id, created_at=now)
     sql.session.add(new_histories)
     sql.session.commit()
     
@@ -223,7 +223,7 @@ def historyApi():
     retdata= []
     
     for i in history_data:
-        jsonres = {"cipher":i.type_of_cipher, "plaintext":i.strings, "key":i.used_key, "result":i.result, "methods":i.methods, "time": i.created_at}
+        jsonres = {"cipher":i.type_of_cipher, "plaintext":i.strings, "key":i.used_key, "result":i.result, "operation":i.operation, "time": i.created_at}
         retdata.append(jsonres)
 
     return jsonify(data=retdata,status=200),200
