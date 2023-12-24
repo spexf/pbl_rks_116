@@ -1030,6 +1030,10 @@ table {
   margin-right: 40px;
 }
 
+.--login-form.hide{
+  display: none;
+}
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;

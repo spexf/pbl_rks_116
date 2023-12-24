@@ -234,5 +234,9 @@
       @apply mx-[40px]
     }
 
+    .--login-form.hide {
+      @apply hidden;
+    }
+
     
 }

@@ -49,6 +49,10 @@ def unauthorized_callback(callback):
 def login():
     return render_template('pages/login.html')
 
+@app.route('/auth/register')
+def register():
+    return render_template('pages/register.html')
+
 @app.route('/test')
 @jwt_required()
 def test():
@@ -62,18 +66,26 @@ def index():
     return render_template('pages/home.html')
 
 @app.route('/api/auth/register', methods=['POST'])
-def register():
+def registerApi():
     username = request.form['username']
     password = request.form['password']
     email = request.form['email']
-    check_duplicate = sql.session.execute(text(f'SELECT * FROM users where username="{username}"')).first()
-    if check_duplicate != None:
-        return make_response({'message': 'Register Failed, Username Has Registered !'}, 422)
     
+    # ! USER DUPLICATION CHECK
+    check_username = sql.session.execute(text(f'SELECT * FROM users where username="{username}"')).first()
+    check_email = sql.session.execute(text(f'SELECT * FROM users where email="{email}"')).first()
+    if check_username != None:
+        return make_response({'message': 'Username Has Registered !'}, 422)
+    if check_email != None:
+        return make_response({'message': 'Email Has Registered !'}, 422)
+    # ! END USER DUPLICATION CHECK
+    
+    # ! ADDING USER TO DATABASE
     new_user = Users(username=username, email=email)
     new_user.set_password(password)
     sql.session.add(new_user)
     sql.session.commit()
+    # ! END ADDING USER TO DATABASE
     
     data = sql.session.execute(text(f'SELECT * FROM users where username="{username}"')).first()
     return jsonify(
