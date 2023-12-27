@@ -18,7 +18,7 @@ git clone https://github.com/spexf/pbl_rks_116
 ```
 dan setelah itu, install requirementnya dengan syntax
 ```
-pip install flask mysql-client sql-alchemy flask-jwt-extended
+pip install flask mysql-client sqlalchemy flask-jwt-extended
 ```
 sebelum menjalankan programnya, kamu perlu mengimport database yang ada di folder IMPORT_THIS_TO_YOUR_MYSQL ke mysql mu melalui phpmyadmin atau mysql mu dengan syntax
 ```
