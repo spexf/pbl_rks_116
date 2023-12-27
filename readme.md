@@ -16,7 +16,7 @@ Yang pertama harus kamu lakukan adalah dengan melakukan cloning repository ini d
 ```
 git clone https://github.com/spexf/pbl_rks_116
 ```
-dan setelah itu, install requirementnya yaitu Flask dengan syntax
+dan setelah itu, install requirementnya dengan syntax
 ```
 pip install flask mysql-client sql-alchemy flask-jwt-extended
 ```
