@@ -74,7 +74,7 @@
 </div>
 {% endblock %}
 <!-- JQUERY PACKAGES -->
-{% block scr %}
+{% block src %}
 <script>
   $(document).ready(() => {
     // VALIDATING
@@ -128,11 +128,62 @@
           icon: "error",
         });
       }
+
       $.ajax({
-        url: `${mainUrl[0]}//${mainUrl[2]}/api/caesar/enc?plain=${plain}&key=${key}`,
+        url: `/api/caesar/enc`,
         type: "POST",
+
+        data: JSON.stringify({
+          plain: plain,
+          key: key,
+        }),
+        contentType: "application/json",
         success: (res) => {
           $("#enc-result").text(res.data);
+          //console.log(res.data);
+          Toastify({
+            text: "Request Success",
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
+        },
+        error: (err) => {
+          console.log(err);
+          Toastify({
+            text: "Request Failed",
+            className: "danger",
+            style: {
+              background:
+                "linear-gradient(90deg, rgba(237,60,60,1) 0%, rgba(173,26,26,1) 100%)",
+            },
+          }).showToast();
+        },
+      });
+    };
+    const decrypt = () => {
+      let cipher = $("#ciphertext").val();
+      let key = $("#dec-key").val();
+      if (key > 26 || key < 1) {
+        return Swal.fire({
+          title: "Key Error",
+          text: "Key Can't Less Than 1 or Larger Than 26",
+          icon: "error",
+        });
+      }
+
+      $.ajax({
+        url: `/api/caesar/dec`,
+        type: "POST",
+
+        data: JSON.stringify({
+          cipher: cipher,
+          key: key,
+        }),
+        contentType: "application/json",
+        success: (res) => {
+          $("#dec-result").text(res.data);
           //console.log(res.data);
           Toastify({
             text: "Request Success",
@@ -158,6 +209,9 @@
 
     $("#encryptSubmit").on("click", () => {
       encrypt();
+    });
+    $("#decryptSubmit").on("click", () => {
+      decrypt();
     });
   });
 </script>

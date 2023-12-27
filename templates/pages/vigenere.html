@@ -73,9 +73,133 @@
     </div>
   </div>
 </div>
+{% endblock %}
 <!-- JQUERY PACKAGES -->
-{% block scr %}
+{% block src %}
 <script>
-  $(document).ready(() => {});
+  const getCookie = (name) => {
+    var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    if (match) return match[2];
+  };
+
+  $(document).ready(() => {
+    // VALIDATING
+    const regex = /^[a-zA-Z]+$/;
+
+    const encrypt = () => {
+      let plain = $("#plaintext").val();
+      let key = $("#enc-key").val();
+      if (!regex.test(plain)) {
+        return Swal.fire({
+          title: "Plaintext Error",
+          text: "Plaintext Can Only Contain Letters",
+          icon: "error",
+        });
+        $("#plaintext").focus();
+      }
+      if (!regex.test(key)) {
+        return Swal.fire({
+          title: "Key Error",
+          text: "Key Can Only Contain Letters",
+          icon: "error",
+        });
+        $("#enc-key").focus();
+      }
+
+      $.ajax({
+        url: `/api/vigenere/enc`,
+        type: "POST",
+
+        data: JSON.stringify({
+          plain: plain,
+          key: key,
+        }),
+        contentType: "application/json",
+        success: (res) => {
+          $("#enc-result").text(res.data);
+          //console.log(res.data);
+          Toastify({
+            text: "Request Success",
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
+        },
+        error: (err) => {
+          console.log(err);
+          Toastify({
+            text: "Request Failed",
+            className: "danger",
+            style: {
+              background:
+                "linear-gradient(90deg, rgba(237,60,60,1) 0%, rgba(173,26,26,1) 100%)",
+            },
+          }).showToast();
+        },
+      });
+    };
+
+    const decrypt = () => {
+      let cipher = $("#ciphertext").val();
+      let key = $("#dec-key").val();
+      if (!regex.test(cipher)) {
+        return Swal.fire({
+          title: "Ciphertext Error",
+          text: "Ciphertext Can Only Contain Letters",
+          icon: "error",
+        });
+        $("#ciphertext").focus();
+      }
+      if (!regex.test(key)) {
+        return Swal.fire({
+          title: "Key Error",
+          text: "Key Can Only Contain Letters",
+          icon: "error",
+        });
+        $("dec-key").focus();
+      }
+      $.ajax({
+        url: `/api/vigenere/dec`,
+        type: "POST",
+
+        data: JSON.stringify({
+          plain: cipher,
+          key: key,
+        }),
+        contentType: "application/json",
+        success: (res) => {
+          $("#dec-result").text(res.data);
+          //console.log(res.data);
+          Toastify({
+            text: "Request Success",
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+          }).showToast();
+        },
+        error: (err) => {
+          console.log(err);
+          Toastify({
+            text: "Request Failed",
+            className: "danger",
+            style: {
+              background:
+                "linear-gradient(90deg, rgba(237,60,60,1) 0%, rgba(173,26,26,1) 100%)",
+            },
+          }).showToast();
+        },
+      });
+    };
+
+    $("#encryptSubmit").on("click", () => {
+      encrypt();
+    });
+
+    $("#decryptSubmit").on("click", () => {
+      decrypt();
+    });
+  });
 </script>
-{% endblock %} {% endblock %}
+{% endblock %}

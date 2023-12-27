@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../../static/source/dist/index.css" />
+  </head>
+
+  <body>
+    <div class="--login-container">
+      <div class="--images">
+        <div class="--instance-icon">
+          <img src="../../static/source/img/rks.png" alt="lambang rks" />
+          <img
+            src="../../static/source/img/polibatam.png"
+            alt="lambang polibatam"
+          />
+        </div>
+        <img
+          class="--cyber-images"
+          src="../../static/source/img/login_images.svg"
+          alt="login"
+        />
+        <div class="--pbl-title">KRIPTOGRAFI KLASIK</div>
+      </div>
+      <div class="--form">
+        <form action="post" class="--login-form">
+          <div class="--login-title">
+            <span class="auth-title" id="signin">SIGN IN</span> /
+            <span class="auth-title" id="signup">SIGN UP</span>
+          </div>
+          <input
+            type="text"
+            id="username"
+            class="--login-input"
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            id="password"
+            class="--login-input"
+            placeholder="Password"
+          />
+          <div class="--login-button" id="signIn">SIGN IN</div>
+        </form>
+      </div>
+    </div>
+    <script src="../static/source/js/jquery-3.7.1.min.js"></script>
+    <script src="../static/source/js/authentication.js"></script>
+    <script
+      src="https://kit.fontawesome.com/fc32737a7d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      $(document).ready(() => {
+        let currentUrl = window.location.href;
+        let sliced = currentUrl.split("/");
+        if (sliced[4] == "login") {
+          $("#signin").addClass("--underline");
+          $("#signup").removeClass("--underline");
+          $("#signup").on("click", () => {
+            window.location.href = "/auth/register";
+          });
+        } else if (sliced[4] == "register") {
+          $("#signup").addClass("--underline");
+          $("#signin").removeClass("--underline");
+          $("#signin").on("click", () => {
+            window.location.href = "/auth/login";
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

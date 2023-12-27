@@ -6,13 +6,34 @@
 
 @layer base {
 
+    /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #549ef1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #b9def3;
+    border-radius: 15px;
+    transition: all ease-in-out .3s;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3dffff;
+  }
     
     body {
-        @apply bg-[#443C68];
+        @apply bg-[#7FC1E3] w-[100%] h-[100%];
     }
 
     .sidebar {
-        @apply md:w-[80px] md:h-[100vh] bg-[#6D51BB] flex md:flex-col items-center justify-center;
+        @apply md:w-[80px] md:h-[100vh] bg-[#0F78AE] flex md:flex-col items-center justify-between;
     }
 
     .sidebar-items {
@@ -20,12 +41,12 @@
     }
 
     .sidebar-items.active {
-        @apply bg-[#A585FF] text-slate-700;
+        @apply bg-[#F6F4EB] text-slate-700;
     }
 
     .greet-1 {
         letter-spacing: 6.75px;
-        @apply text-white font-medium text-[50px] mx-[2rem];
+        @apply text-slate-700 font-medium text-[50px] mx-[2rem];
     }
 
 
@@ -37,7 +58,7 @@
     .decrypt > .title {
         letter-spacing: 2.5px;
         text-align: left;
-        @apply text-white text-[27px] font-medium;
+        @apply text-slate-700 text-[27px] font-medium;
     }
 
     .main-content > .encrypt, 
@@ -55,22 +76,167 @@
 
     .input-text.input-plaintext,
     .input-text.input-ciphertext {
-        @apply bg-[#6751A6] md:w-[450px] h-[50px] text-white font-medium px-[1.5rem] rounded-[25px] drop-shadow-md;
+        @apply bg-[#EDEDED] md:w-[450px] h-[50px] text-slate-700 font-medium px-[1.5rem] rounded-[25px] drop-shadow-md;
     }
 
     .input-text.input-key ,
     .input-number.input-key {
-        @apply md:w-[268px] h-[50px] text-white font-medium bg-[#6751A6] rounded-[25px] px-[1.5rem] drop-shadow-md;
+        @apply md:w-[268px] h-[50px] text-slate-700 font-medium bg-[#EDEDED] rounded-[25px] px-[1.5rem] drop-shadow-md;
     }
 
     .button-submit {
-        @apply w-[160px] h-[50px] px-[1.5rem] text-white font-medium bg-[#936EFD] rounded-[25px] flex justify-around items-center drop-shadow-md hover:bg-[#7747FF] hover:cursor-pointer transition duration-300;
+        @apply w-[160px] h-[50px] px-[1.5rem] text-white font-medium bg-[#0D6EFD] rounded-[25px] flex justify-around items-center drop-shadow-md active:bg-[#4791FF] hover:bg-[#327AE5] hover:cursor-pointer transition duration-300;
+    }
+
+    .profile,.auth {
+      @apply text-white;
+    }
+    .profile.active, .auth.active {
+      @apply text-slate-700;
     }
 
     textarea.result {
         resize: none;
-        @apply w-[450px] h-[248px] bg-[#6D51BB] px-[1.5rem] py-[1rem] rounded-[25px] drop-shadow-md text-white font-medium;
+        @apply w-[450px] h-[248px] bg-[#F6F4EB] px-[1.5rem] py-[1rem] rounded-[25px] drop-shadow-md text-slate-700 font-medium;
     }
 
+    .--login-container{
+      @apply w-[100vw] h-[100vh] flex items-center justify-center;
+    }
 
+    .--images {
+      @apply w-[700px] h-[631px] bg-white flex items-center drop-shadow-md flex-col;
+    }
+
+    .--instance-icon {
+      @apply flex justify-between items-center w-full h-[80px];
+    }
+
+    .--instance-icon > img {
+      @apply h-[60px] w-fit mx-[1rem] my-[1rem] drop-shadow-md;
+    }
+
+    .--pbl-title{
+      @apply text-black drop-shadow-md
+    }
+
+    .--form {
+      @apply flex flex-col items-center justify-around bg-gradient-to-b from-[#4682A9] to-[#1B668C] w-[750px] h-[631px] ;
+    }
+
+    .--form > .--login-form {
+      @apply flex flex-col items-center justify-center w-[477px] h-[411px] ;
+    }
+
+    .--form > .--login-form > .--login-input {
+      letter-spacing: 5px;
+      border: none;
+      outline: none;
+      @apply my-[.5rem] w-[477px] h-[60px] py-[21px] px-[32px] bg-[#FFFFFF]/[15%] drop-shadow-md text-[20px] font-medium text-white duration-300 transition-all;
+      
+    }
+
+    .--form > .--login-form > .--login-input:focus {
+      border-bottom: 5px rgb(65, 185, 169) solid;
+    }
+
+    .--login-button {
+      letter-spacing: 3px;
+      @apply w-[161px] h-[55px] flex items-center justify-around my-[.5rem] text-[18px] text-white bg-[#02A1FF] rounded-md drop-shadow-md self-end cursor-pointer hover:bg-[#1081C5] active:bg-[#69ADD6] transition-all duration-300 ;
+    }
+
+    .--login-title {
+      letter-spacing: 4px;
+      @apply text-[20px] text-white drop-shadow-md font-medium my-[2rem];
+    }
+
+    .--underline {
+      text-decoration: underline #00ffff;
+      text-underline-offset: 2px;
+      @apply transition-all duration-300;
+    }
+
+    .auth-title {
+      @apply transition-all hover:text-[#2fffff] cursor-pointer duration-300;
+    }
+
+    .--cyber-images {
+      @apply flex self-center justify-self-center my-[3rem];
+    }
+
+    .--pbl-title {
+      text-align: center;
+      @apply flex self-center text-[40px] font-medium drop-shadow-md; 
+    }
+
+    .clear-button {
+      @apply flex items-center transition-all duration-300 text-white cursor-pointer justify-around w-[120px] h-[50px] font-medium text-[15px] bg-rose-600 hover:bg-rose-700 active:bg-rose-900 rounded-lg;
+    }
+
+    .wrapper {
+      @apply  text-[15px] font-medium drop-shadow-md;
+    }
+
+    /* .history-container {
+      @apply flex flex-col items-center justify-between w-[80%] rounded-[15px] overflow-y-scroll h-[400px] self-center px-[15px] py-[15px] bg-[#D7C9FF];
+    } */
+
+    .data-display {
+      @apply w-[inherit] h-fit
+    }
+
+    thead {
+      @apply rounded-tl-lg rounded-tr-lg w-[100%];
+    }
+
+    th {
+      text-align: center;
+      @apply w-[260px] ; 
+    }
+
+    tbody.history-container {
+      overflow-y: scroll;
+      display: block;
+      @apply h-[250px] w-full;
+      @apply px-[10px] py-[10px];
+    }
+
+    tr {
+      width: 250px;
+    }
+
+    table {
+      display: block;
+      @apply h-[300px] self-center w-[80%] bg-[#F6F4EB] rounded-[15px];
+    }
+
+    .table-container {
+      @apply w-full flex justify-around my-[50px]  ;
+    }
+
+    .user-data {
+      @apply flex items-center w-[40%]  my-[20px];
+    }
+
+    .profile-image {
+      @apply rounded-[50%] w-[196px] h-[196px];
+    }
+
+    .profile-image > img {
+      @apply rounded-[50%] w-[196px] h-[196px]
+    }
+
+    .username,.email {
+      @apply font-medium w-[80%] text-[27px] text-[white];
+    }
+
+    .some-user-data {
+      @apply mx-[40px]
+    }
+
+    .--login-form.hide {
+      @apply hidden;
+    }
+
+    
 }
