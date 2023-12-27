@@ -20,7 +20,10 @@ dan setelah itu, install requirementnya yaitu Flask dengan syntax
 ```
 pip install flask mysql-client sql-alchemy flask-jwt-extended
 ```
-sebelum menjalankan programnya, kamu perlu mengimport database yang ada di folder IMPORT_THIS_TO_YOUR_MYSQL ke mysql mu.
+sebelum menjalankan programnya, kamu perlu mengimport database yang ada di folder IMPORT_THIS_TO_YOUR_MYSQL ke mysql mu melalui phpmyadmin atau mysql mu dengan syntax
+```
+source path/to/file
+```
 setelah kamu melakukan ketiga hal diatas, selanjutnya tinggal jalankan program **app.py**
 ```
 python app.py
