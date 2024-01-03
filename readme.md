@@ -31,4 +31,4 @@ python app.py
 selanjutnya buka di browser dengan url defaultnya yaitu `localhost:5000` (portnya bisa berbeda tergantung bagaimana settingan di **app.py** nya)
 
 > [!NOTE]
-> Kalau ada yang mau ditambah lagi di readme ini, chat thoriq aja di wa
+> Kalau ada yang mau ditambah lagi di readme ini, chat thoriq aja di dc

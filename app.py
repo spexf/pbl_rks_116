@@ -39,7 +39,11 @@ class Histories(sql.Model):
     used_key = sql.Column(sql.String(255), nullable=False)
     user_id = sql.Column(sql.Integer, nullable=False)
     created_at = sql.Column(sql.DateTime, nullable=False)
-    
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('err/404.html'), 404
 
 @jwt.unauthorized_loader
 def unauthorized_callback(callback):
@@ -53,13 +57,13 @@ def login():
 def register():
     return render_template('pages/register.html')
 
-@app.route('/test')
-@jwt_required()
-def test():
-    current_user = get_jwt_identity()
-    data = sql.session.execute(text(f'SELECT * FROM users WHERE username="{current_user}"')).first()
-    # print(data.username)
-    return jsonify(200,str(data.id))
+# @app.route('/test')
+# @jwt_required()
+# def test():
+#     current_user = get_jwt_identity()
+#     data = sql.session.execute(text(f'SELECT * FROM users WHERE username="{current_user}"')).first()
+#     # print(data.username)
+#     return jsonify(200,str(data.id))
 
 @app.route('/')
 def index():
