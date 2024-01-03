@@ -13,7 +13,7 @@ app.config['JWT_SECRET_KEY'] = 'fd9f74595c05499287de366bcc1068d6'
 app.config['JWT_TOKEN_LOCATION'] = ['cookies','headers']
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/pblRKS116'
 app.config['JWT_ACCESS_COOKIE_PATH'] = '/api/'
-app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
+# app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config['JWT_COOKIE_CSRF_PROTECT'] = False
 
@@ -157,6 +157,7 @@ def caesarDec():
         status=200,
         data=result
     )
+    
 @app.route('/api/caesar/enc', methods=['POST'])
 @jwt_required()
 def caesarEnc():
@@ -193,6 +194,7 @@ def vigenereEnc():
         status=200,
         data=result
     )
+    
 @app.route('/api/vigenere/dec', methods=['POST'])
 @jwt_required()
 def vigenereDec():
